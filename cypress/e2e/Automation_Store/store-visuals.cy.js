@@ -20,7 +20,7 @@ describe('Visual Validation', function() {
     Also creates the app and batch name
     Each test should open its own Eyes for its own snapshots. 
     */
-    cy.eyesOpen({appName: 'QW Automation Store', batchName: 'Cross Browser Test!',})
+    cy.eyesOpen({appName: 'QW Automation Store', batchName: 'Visual Regression Test!',})
   })
 
   // This method performs cleanup after each test.
@@ -38,6 +38,7 @@ describe('Visual Validation', function() {
   })
 
   //QW add to cart automation workflow
+  /*
   it('Add an item to the cart', () => {
     //Select an item
     Store_Page.quality_hat.click()
@@ -45,10 +46,11 @@ describe('Visual Validation', function() {
     cy.eyesCheckWindow('Item Selected')
     //Add an extra unit of the item
     Store_Page.increase_unit.click()
-    cy.eyesCheckWindow('Increase the unit of the item')
+    /cy.eyesCheckWindow('Increase the unit of the item')
      //Add item to cart
     Store_Page.add_to_cart.click()
     cy.wait(1000)
     cy.eyesCheckWindow('Item in my cart')
   })
+  */
 })
