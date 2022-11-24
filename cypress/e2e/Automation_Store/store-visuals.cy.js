@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 // This test case spec contains everything needed to run a full visual test against the QW online store site.
-// The line below imports the store page objects.to
+// The line below imports the StorePage class from our page objects file.
 import {StorePage} from '../../page-objects/store-page'
 
 // This "describe" method contains related test cases with per-test setup and cleanup.
@@ -31,16 +31,24 @@ describe('Visual Validation', function() {
   })
 
   //Filers item prices from lowest to highest
-  it('Filter from lowest to highest', () => {
+  it.only('Filter from lowest to highest', () => {
     Store_Page.sortItemButton.click()
     Store_Page.lowestToHighest.click()
     cy.eyesCheckWindow('Store item prices from lowest to highest')
   })
 
-  //Filers item prices from highest to lowest
-  it('Filter from highest to lowest', () => {
-    Store_Page.sortItemButton.click()
-    Store_Page.highestToLowest.click()
-    cy.eyesCheckWindow('Store item prices from highest to lowest')
+  //QW add to cart automation workflow
+  it('Add an item to the cart', () => {
+    //Select an item
+    Store_Page.quality_hat.click()
+    cy.wait(500)
+    cy.eyesCheckWindow('Item Selected')
+    //Add an extra unit of the item
+    Store_Page.increase_unit.click()
+    cy.eyesCheckWindow('Increase the unit of the item')
+     //Add item to cart
+    Store_Page.add_to_cart.click()
+    cy.wait(1000)
+    cy.eyesCheckWindow('Item in my cart')
   })
 })
