@@ -1,1 +1,1 @@
-# Visual-Studo-Workshop
+# Visual-Regression-Workshop
