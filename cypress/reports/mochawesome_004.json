@@ -1,0 +1,162 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2022-12-01T02:30:52.253Z",
+    "end": "2022-12-01T02:30:56.642Z",
+    "duration": 4389,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "98ea2eec-4b99-412d-b597-b73fba256fb7",
+      "title": "",
+      "fullFile": "cypress/e2e/Automation_Store/sorting.cy.js",
+      "file": "cypress/e2e/Automation_Store/sorting.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "b3cbc4fa-491b-4f2f-9bfd-e3cc02a7dd30",
+          "title": "Sort Validations",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should sort items from A-Z",
+              "fullTitle": "Sort Validations should sort items from A-Z",
+              "timedOut": null,
+              "duration": 1120,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "//sort product list on page\n_productsPage.default.sortBy('az'); //check active option\n\ncy.get(_productsPage.default.activeOption).should('have.text', 'Name (A to Z)'); //assert list is in the right order\ncy.get(_productsPage.default.inventoryItems).each((item, index) => {\n  let sorted = _inventoryData.default.sort((a, b) => a.name > b.name ? 1 : -1); //entire text of element is returned so capture substring that contains product name only\n\n  expect(item.text().slice(0, sorted[index].count)).equal(sorted[index].name);\n});",
+              "err": {},
+              "uuid": "e727e7a6-5e1b-4d3d-92d1-760d4ec9efe9",
+              "parentUUID": "b3cbc4fa-491b-4f2f-9bfd-e3cc02a7dd30",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should sort items from Z-A",
+              "fullTitle": "Sort Validations should sort items from Z-A",
+              "timedOut": null,
+              "duration": 1138,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "//sort product list on page\n_productsPage.default.sortBy('za'); //check active option\n\ncy.get(_productsPage.default.activeOption).should('have.text', 'Name (Z to A)'); //assert list is in the right order\ncy.get(_productsPage.default.inventoryItems).each((item, index) => {\n  let sorted = _inventoryData.default.sort((a, b) => b.name > a.name ? 1 : -1); //entire text of element is returned so capture substring that contains product name only\n\n  expect(item.text().slice(0, sorted[index].count)).equal(sorted[index].name);\n});",
+              "err": {},
+              "uuid": "ecd98dac-550c-40bb-bfed-a9e9894c08e4",
+              "parentUUID": "b3cbc4fa-491b-4f2f-9bfd-e3cc02a7dd30",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should sort items from low to high",
+              "fullTitle": "Sort Validations should sort items from low to high",
+              "timedOut": null,
+              "duration": 1040,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "//sort product list on page\n_productsPage.default.sortBy('lohi'); //check active option\n\ncy.get(_productsPage.default.activeOption).should('have.text', 'Price (low to high)'); //assert list is in the right order\ncy.get(_productsPage.default.inventoryItems).each((item, index) => {\n  let sorted = _inventoryData.default.sort((a, b) => a.price > b.price ? 1 : -1); //find the price element and assert the price value is correct based on sorting\n\n  cy.get(item).find(_productsPage.default.itemPrice).should('have.text', '$' + sorted[index].price); //expect(item.text().slice(0, sorted[index].count)).equal('$' + sorted[index].price)\n});",
+              "err": {},
+              "uuid": "4fe6ab4f-90ea-4ad6-b4dc-f83b87a9b250",
+              "parentUUID": "b3cbc4fa-491b-4f2f-9bfd-e3cc02a7dd30",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should sort items from high to low",
+              "fullTitle": "Sort Validations should sort items from high to low",
+              "timedOut": null,
+              "duration": 1041,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "//sort product list on page\n_productsPage.default.sortBy('hilo'); //check active option\n\ncy.get(_productsPage.default.activeOption).should('have.text', 'Price (high to low)'); //assert list is in the right order\ncy.get(_productsPage.default.inventoryItems).each((item, index) => {\n  let sorted = _inventoryData.default.sort((a, b) => b.price > a.price ? 1 : -1); //find the price element and assert the price value is correct based on sorting\n\n  cy.get(item).find(_productsPage.default.itemPrice).should('have.text', '$' + sorted[index].price); //expect(item.text().slice(0, sorted[index].count)).equal('$' + sorted[index].price)\n});",
+              "err": {},
+              "uuid": "ee4785f7-2be7-4d43-b759-b1ab36cb98a3",
+              "parentUUID": "b3cbc4fa-491b-4f2f-9bfd-e3cc02a7dd30",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "e727e7a6-5e1b-4d3d-92d1-760d4ec9efe9",
+            "ecd98dac-550c-40bb-bfed-a9e9894c08e4",
+            "4fe6ab4f-90ea-4ad6-b4dc-f83b87a9b250",
+            "ee4785f7-2be7-4d43-b759-b1ab36cb98a3"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 4339,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

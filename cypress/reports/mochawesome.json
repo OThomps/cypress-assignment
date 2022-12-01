@@ -1,0 +1,124 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2022-12-01T02:29:59.223Z",
+    "end": "2022-12-01T02:30:06.605Z",
+    "duration": 7382,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "b687dbf6-bb6a-43d2-9f69-9f1671cb5a7b",
+      "title": "",
+      "fullFile": "cypress/e2e/Automation_Store/checkoutFlow.cy.js",
+      "file": "cypress/e2e/Automation_Store/checkoutFlow.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "f56054c5-6afe-4a15-ab83-7e3b1bf3cd29",
+          "title": "Checkout Workflows",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should complete checkout with a single item",
+              "fullTitle": "Checkout Workflows should complete checkout with a single item",
+              "timedOut": null,
+              "duration": 4734,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "//add single item to cart\n_productsPage.default.addToCart(); //check cart icon was updated and item now has a remove button\n\ncy.get(_productsPage.default.cartBadge).should('be.visible').should('have.text', '1');\ncy.get(_productsPage.default.removeBtn).should('be.visible'); //navigate to cart and check item is correct\n_productsPage.default.navToCart();\ncy.url().should('eq', _productsData.default[3].cartUrl);\ncy.get(_cartToCheckout.default.singleItem).should('have.text', _productsData.default[0].product);\ncy.get(_cartToCheckout.default.cartQuantity).should('have.text', 1);\ncy.get(_cartToCheckout.default.itemPrice).should('have.text', '$' + _productsData.default[0].price); //continue to checkout and fill out form\ncy.get(_cartToCheckout.default.checkoutBtn).click();\ncy.url().should('eq', _productsData.default[3].checkoutUrl);\n_cartToCheckout.default.completeForm(); //confirm overview information\n\ncy.url().should('eq', _productsData.default[3].checkoutNextUrl);\ncy.get(_cartToCheckout.default.itemTotal).should('include.text', '$' + _productsData.default[0].price);\ncy.get(_cartToCheckout.default.tax).should('include.text', '$' + _productsData.default[0].expectedTax);\ncy.get(_cartToCheckout.default.total).should('include.text', '$' + (_productsData.default[0].price + _productsData.default[0].expectedTax));\ncy.get(_cartToCheckout.default.finishBtn).click(); //confirm completion\ncy.url().should('eq', _productsData.default[3].confirmationUrl);\ncy.get(_cartToCheckout.default.completeHeader).should('have.text', \"THANK YOU FOR YOUR ORDER\");",
+              "err": {},
+              "uuid": "4bc5da94-8b5c-4fed-81ce-0dc70d9ee64a",
+              "parentUUID": "f56054c5-6afe-4a15-ab83-7e3b1bf3cd29",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should complete checkout with multiple items",
+              "fullTitle": "Checkout Workflows should complete checkout with multiple items",
+              "timedOut": null,
+              "duration": 2565,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "//add items to cart\n_productsPage.default.addMultiCart(); //check cart icon was updated to match number of items added\n\ncy.get(_productsPage.default.cartBadge).should('be.visible').should('have.text', '3'); //navigate to cart and check item is correct\n_productsPage.default.navToCart();\ncy.url().should('eq', _productsData.default[3].cartUrl); //confirm items were added accurately and their price matches what was shown on the products page\ncy.get(_cartToCheckout.default.allItems).find('#item_0_title_link').should('have.text', _productsData.default[1].product).siblings('.item_pricebar').children(_cartToCheckout.default.itemPrice).should('have.text', '$' + _productsData.default[1].price);\ncy.get(_cartToCheckout.default.allItems).find('#item_1_title_link').should('have.text', _productsData.default[2].product).siblings('.item_pricebar').children(_cartToCheckout.default.itemPrice).should('have.text', '$' + _productsData.default[2].price);\ncy.get(_cartToCheckout.default.allItems).find('#item_2_title_link').should('have.text', _productsData.default[0].product).siblings('.item_pricebar').children(_cartToCheckout.default.itemPrice).should('have.text', '$' + _productsData.default[0].price); //continue to checkout and fill out form\ncy.get(_cartToCheckout.default.checkoutBtn).click();\ncy.url().should('eq', _productsData.default[3].checkoutUrl);\n_cartToCheckout.default.completeForm(); //confirm overview information\n\ncy.url().should('eq', _productsData.default[3].checkoutNextUrl); //calculations for total cost and tax for items\nconst itemTotalPrice = _productsData.default[1].price + _productsData.default[2].price + _productsData.default[0].price;\nconst tax = _productsData.default[1].expectedTax + _productsData.default[2].expectedTax + _productsData.default[0].expectedTax;\nconst grandTotal = itemTotalPrice + tax; //assert values\ncy.get(_cartToCheckout.default.itemTotal).should('include.text', '$' + itemTotalPrice);\ncy.get(_cartToCheckout.default.tax).should('include.text', '$' + tax);\ncy.get(_cartToCheckout.default.total).should('include.text', '$' + grandTotal);\ncy.get(_cartToCheckout.default.finishBtn).click(); //confirm completion\ncy.url().should('eq', _productsData.default[3].confirmationUrl);\ncy.get(_cartToCheckout.default.completeHeader).should('have.text', \"THANK YOU FOR YOUR ORDER\");",
+              "err": {},
+              "uuid": "1392ccaf-1bd2-49e1-a8b7-0062ad839e4a",
+              "parentUUID": "f56054c5-6afe-4a15-ab83-7e3b1bf3cd29",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "4bc5da94-8b5c-4fed-81ce-0dc70d9ee64a",
+            "1392ccaf-1bd2-49e1-a8b7-0062ad839e4a"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 7299,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
